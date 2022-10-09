@@ -1,4 +1,12 @@
-import './index.css';
-import App from './src/components/app';
+import "./index.css";
+// import App from "./src/components/appFunction";
 
-window.onload = () => new App();
+// window.onload = () => {
+//     App;
+// };
+
+import App from "./src/components/geometry";
+
+window.onload = () => {
+    new App();
+};

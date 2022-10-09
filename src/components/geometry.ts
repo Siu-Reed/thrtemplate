@@ -1,11 +1,12 @@
 import * as Three from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 export default class App {
     private container: HTMLDivElement = document.querySelector("#webgl-container")!;
     private renderer: Three.WebGLRenderer = new Three.WebGLRenderer({ antialias: true });
     private scene: Three.Scene = new Three.Scene();
     private camera!: Three.PerspectiveCamera;
-    private cube!: Three.Mesh;
+    private group: Three.Group = new Three.Group();
 
     stageWidth!: number;
     stageHeight!: number;
@@ -18,6 +19,7 @@ export default class App {
         this.setupCamera();
         this.setupLight();
         this.setupModel();
+        this.setupControls();
 
         this.resize();
         requestAnimationFrame(this.render.bind(this));
@@ -43,14 +45,19 @@ export default class App {
     }
 
     private setupModel() {
-        const geometry = new Three.BoxGeometry(1, 1, 1);
+        const geometry = new Three.SphereGeometry(1, 10, 10);
         const material = new Three.MeshPhongMaterial({ color: 0x44a88 });
-
+        const lineMaterial = new Three.LineBasicMaterial({ color: 0xffff00 });
+        const line = new Three.LineSegments(new Three.WireframeGeometry(geometry), lineMaterial);
         const cube = new Three.Mesh(geometry, material);
+        this.group.add(cube, line);
 
-        this.scene.add(cube);
-        this.cube = cube;
+        this.scene.add(this.group);
     }
+    private setupControls() {
+        new OrbitControls(this.camera, this.container);
+    }
+
     reRender() {
         this.camera.aspect = this.stageWidth / this.stageHeight;
         this.camera.updateProjectionMatrix();
@@ -62,8 +69,8 @@ export default class App {
     }
     update(T: DOMHighResTimeStamp) {
         T *= 0.001;
-        this.cube.rotation.x = T;
-        this.cube.rotation.y = T / 10;
+        this.group.rotation.x = T;
+        this.group.rotation.y = T / 10;
     }
     render(T: DOMHighResTimeStamp) {
         this.renderer.render(this.scene, this.camera);
