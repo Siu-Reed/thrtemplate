@@ -1,4 +1,5 @@
 import * as Three from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 export default class App {
     private container: HTMLDivElement = document.querySelector("#webgl-container")!;
@@ -18,6 +19,7 @@ export default class App {
         this.setupCamera();
         this.setupLight();
         this.setupModel();
+        this.setupControls();
 
         this.resize();
         requestAnimationFrame(this.render.bind(this));
@@ -31,7 +33,7 @@ export default class App {
 
     private setupCamera() {
         this.camera = new Three.PerspectiveCamera(75, this.stageWidth / this.stageHeight, 0.1, 100);
-        this.camera.position.z = 2;
+        this.camera.position.z = 10;
     }
 
     private setupLight() {
@@ -44,7 +46,7 @@ export default class App {
 
     private setupModel() {
         const vertices = [];
-        for (let i = 0; 1 < 10000; i++) {
+        for (let i = 0; i < 10000; i++) {
             const x = Three.MathUtils.randFloatSpread(5);
             const y = Three.MathUtils.randFloatSpread(5);
             const z = Three.MathUtils.randFloatSpread(5);
@@ -54,13 +56,20 @@ export default class App {
         geometry.setAttribute("position", new Three.Float32BufferAttribute(vertices, 3));
         // 3은 xyz 세 수가 하나의 좌표임을 의미
 
+        const sprite = new Three.TextureLoader().load("./circle.png");
         const material = new Three.PointsMaterial({
-            color: 0xff0000,
+            map: sprite,
+            alphaTest: 0.5,
+            color: 0xffff00,
             size: 5,
             sizeAttenuation: false,
         });
+
         const points = new Three.Points(geometry, material);
         this.scene.add(points);
+    }
+    private setupControls() {
+        new OrbitControls(this.camera, this.container);
     }
     reRender() {
         this.camera.aspect = this.stageWidth / this.stageHeight;
@@ -73,8 +82,6 @@ export default class App {
     }
     update(T: DOMHighResTimeStamp) {
         T *= 0.001;
-        this.cube.rotation.x = T;
-        this.cube.rotation.y = T / 10;
     }
     render(T: DOMHighResTimeStamp) {
         this.renderer.render(this.scene, this.camera);
