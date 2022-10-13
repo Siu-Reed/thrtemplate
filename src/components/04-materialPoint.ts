@@ -6,7 +6,6 @@ export default class App {
     private renderer: Three.WebGLRenderer = new Three.WebGLRenderer({ antialias: true });
     private scene: Three.Scene = new Three.Scene();
     private camera!: Three.PerspectiveCamera;
-    private cube!: Three.Mesh;
 
     stageWidth!: number;
     stageHeight!: number;
@@ -60,9 +59,13 @@ export default class App {
         const material = new Three.PointsMaterial({
             map: sprite,
             alphaTest: 0.5,
+            // 픽셀 값 중 알파값이 alphaTest 값보다 클 때만 렌더링
             color: 0xffff00,
-            size: 5,
-            sizeAttenuation: false,
+            size: 0.1,
+            // 포인트의 크기
+            sizeAttenuation: true,
+            // 카메라 거리에 따른 크기 변환
+            // 카메라에서 가까운 포인트는 크고 먼 포인트는 작아지는 원근..
         });
 
         const points = new Three.Points(geometry, material);
