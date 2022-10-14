@@ -51,9 +51,9 @@ export default class App {
             metalness: 5,
 
             clearcoat: 0,
-            // 0~1사이 값 메쉬표면 코딩 재질 0은 코딩이 표현 전혀 안되고 1은 코딩표현 최대
+            // 0~1사이 값 메쉬표면 코팅 재질 0은 코팅이 표현 전혀 안되고 1은 코팅표현 최대
             clearcoatRoughness: 0,
-            // 코딩에 대한 거칠기 값
+            // 코팅에 대한 거칠기 값
 
             flatShading: false,
             wireframe: false,
