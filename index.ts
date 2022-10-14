@@ -5,7 +5,7 @@ import "./index.css";
 //     App;
 // };
 
-import App from "./src/components/04-materialMesh";
+import App from "./src/components/05-texture-map";
 
 window.onload = () => {
     new App();
