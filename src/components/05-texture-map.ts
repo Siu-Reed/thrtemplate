@@ -78,7 +78,8 @@ export default class App {
             // texture.magFilter = Three.NearestFilter;
             // 가장 가까운 값, 계단
             texture.minFilter = Three.NearestMipMapLinearFilter;
-            // mipmap /2 로 축소 한 이미지
+            // mipmap /2 로 축소 한 이미지,
+            // mipmap 품질은 뛰어나나 메모리 사용량 높음
         });
         // 텍스쳐 속성은 텍스쳐 객체가 생성된 이후에 설정 되어야해서 콜백함수
         const material = new Three.MeshStandardMaterial({

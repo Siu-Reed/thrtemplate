@@ -45,44 +45,17 @@ export default class App {
 
     private setupModel() {
         const textureLoader = new Three.TextureLoader();
-        const map = textureLoader.load("./1.jpg", texture => {
-            texture.repeat.x = 4;
-            texture.repeat.y = 4;
-            // 반복도
+        const map = textureLoader.load("./Glass_Window_002_SD/Glass_Window_002_basecolor.jpg");
+        const mapAO = textureLoader.load("./Glass_Window_002_SD/Glass_Window_002_ambientOcclusion.jpg");
+        const mapHeight = textureLoader.load("./Glass_Window_002_SD/Glass_Window_002_height.jpg");
+        const mapNormal = textureLoader.load("./Glass_Window_002_SD/Glass_Window_002_normal.jpg");
+        const mapRoughness = textureLoader.load("./Glass_Window_002_SD/Glass_Window_002_roughness.jpg");
+        const mapMetalic = textureLoader.load("./Glass_Window_002_SD/Glass_Window_002_metallic.jpg");
+        const mapAlpha = textureLoader.load("./Glass_Window_002_SD/Glass_Window_002_opacity.jpg");
 
-            texture.wrapS = Three.RepeatWrapping;
-            texture.wrapT = Three.RepeatWrapping;
-
-            // texture.wrapS = Three.ClampToEdgeWrapping;
-            // texture.wrapT = Three.ClampToEdgeWrapping;
-            // 처음에만 랩핑 후 끝선 확장
-
-            // texture.wrapS = Three.MirroredRepeatWrapping;
-            // texture.wrapT = Three.MirroredRepeatWrapping;
-            // 거울 반사 랩핑
-
-            texture.offset.x = 0.5;
-            texture.offset.y = 0.5;
-            // 랩핑 이동
-
-            // texture.rotation = Three.MathUtils.degToRad(45);
-            // texture.center.x = 0.5;
-            // texture.center.y = 0.5;
-            // 0.5 0.5 좌표 기준 회전
-
-            // magFilter 원래 텍스쳐 이미지보다 크게 확대되어 렌더링 될 때 사용됨
-            // minFilter 원래 텍스쳐 이미지보다 작게 축소되어 렌더링 될 때 사용됨
-
-            texture.magFilter = Three.LinearFilter;
-            // 기본 값 선형 보간, 흐릿
-            // texture.magFilter = Three.NearestFilter;
-            // 가장 가까운 값, 계단
-            texture.minFilter = Three.NearestMipMapLinearFilter;
-            // mipmap /2 로 축소 한 이미지
-        });
-        // 텍스쳐 속성은 텍스쳐 객체가 생성된 이후에 설정 되어야해서 콜백함수
         const material = new Three.MeshStandardMaterial({
             map: map,
+            normalMap: mapNormal,
         });
         // Uv 좌표는 three.js의 geometry에 기본 지정되어 있고 0~1의 값임
 
