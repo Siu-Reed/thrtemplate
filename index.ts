@@ -5,7 +5,7 @@ import "./index.css";
 //     App;
 // };
 
-import App from "./src/components/05-texture-window";
+import App from "./src/components/05-texture-window2";
 
 window.onload = () => {
     new App();

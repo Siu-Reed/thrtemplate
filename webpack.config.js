@@ -38,7 +38,7 @@ module.exports = {
             },
         ],
     },
-    plugins: [new HtmlWebpackPlugin({ template: "./index.html" }), new CleanWebpackPlugin()],
+    plugins: [new HtmlWebpackPlugin({ template: "./index.html" })],
     devServer: {
         static: {
             directory: path.join(__dirname, "public"),
