@@ -73,8 +73,6 @@ export default class App {
             // 변위효과 기본값 1
             displacementBias: -0.15,
             // 뜨는 사각형 조절.. 잘 모르겟으 찾아봐야됨
-
-            aoMap: mapAO,
         });
 
         const box = new Three.Mesh(new Three.BoxGeometry(1, 1, 1, 256, 256, 256), material);

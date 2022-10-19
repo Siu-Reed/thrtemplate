@@ -5,7 +5,7 @@ import "./index.css";
 //     App;
 // };
 
-import App from "./src/components/05-texture-window2";
+import App from "./src/components/06-custom-geometry";
 
 window.onload = () => {
     new App();
