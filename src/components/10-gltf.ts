@@ -33,7 +33,7 @@ export default class App {
 
     private setupCamera() {
         this.camera = new Three.PerspectiveCamera(75, this.stageWidth / this.stageHeight, 0.1, 100);
-        this.camera.position.z = 4;
+        this.camera.position.z = 6;
         this.scene.add(this.camera);
     }
     private setupLight() {
@@ -41,11 +41,12 @@ export default class App {
         const intensity = 1;
         const light = new Three.DirectionalLight(color, intensity);
         light.position.set(-1, 2, 4);
-        this.scene.add(light);
+        this.camera.add(light);
+        // 동적 광원
     }
     private setupModel() {
         const gltfLoader = new GLTFLoader();
-        gltfLoader.load("./msp/msp.gltf", gltf => {
+        gltfLoader.load("./msp/untitled.gltf", gltf => {
             const root = gltf.scene;
             this.scene.add(root);
         });

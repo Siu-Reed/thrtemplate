@@ -1,4 +1,5 @@
 import * as Three from "three";
+import { TextureLoader } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { VertexNormalsHelper } from "three/examples/jsm/helpers/VertexNormalsHelper";
 
@@ -47,30 +48,41 @@ export default class App {
 
     private setupModel() {
         const rawPositions = [-1, -1, 0, 1, -1, 0, -1, 1, 0, 1, 1, 0];
-
+        const rawNormals = [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1];
+        const rawColors = [1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0];
+        const rawUVs = [0, 0, 1, 0, 0, 1, 1, 1];
         const positions = new Float32Array(rawPositions);
+        const normals = new Float32Array(rawNormals);
+        const colors = new Float32Array(rawColors);
+        const uvs = new Float32Array(rawUVs);
+
         const geometry = new Three.BufferGeometry();
         geometry.setAttribute("position", new Three.BufferAttribute(positions, 3));
-
         geometry.setIndex([0, 1, 2, 2, 1, 3]);
         //정점 구성, 좌표 0(-1,-1,0)부터 시작하여 삼각형 012, 213 을 그려서 사각형 표현
 
         // geometry.computeVertexNormals();
         // 자동 법선 벡터 /정점에 대한 법선벡터가 지정되어야 제대로 작동 (입사각과 반사각 계산하여 재질 표면과 색상 결정)
 
-        const rawNormals = [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1];
-        const normals = new Float32Array(rawNormals);
         geometry.setAttribute("normal", new Three.BufferAttribute(normals, 3));
         // 사용자 지정 법선 벡터
         // 메쉬 표면 수직으로 지정해야하기 때문에 0,0,1
 
-        const rawColors = [1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0];
-        const colors = new Float32Array(rawColors);
         geometry.setAttribute("color", new Three.BufferAttribute(colors, 3));
         // 사용자 지정 색상, 재질에 vertexColors 속성 추가해야 정상 적용
         // 메쉬 기본 색상에 영향 받음
 
-        const material = new Three.MeshPhongMaterial({ color: 0xffffff, vertexColors: true });
+        geometry.setAttribute("uv", new Three.BufferAttribute(uvs, 2));
+        // uv는 두개의 값이 하나의 좌표를 구성하여 2
+
+        const textureLoader = new Three.TextureLoader();
+        const map = textureLoader.load("./uv_grid_opengl.jpeg");
+
+        const material = new Three.MeshPhongMaterial({
+            color: 0xffffff,
+            vertexColors: true,
+            map: map,
+        });
         const box = new Three.Mesh(geometry, material);
 
         const helper = new VertexNormalsHelper(box, 0.1, 0xffff00);

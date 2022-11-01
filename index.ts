@@ -5,7 +5,7 @@ import "./index.css";
 //     App;
 // };
 
-import App from "./src/components/10-gltf";
+import App from "./src/components/msp";
 
 window.onload = () => {
     new App();
