@@ -131,6 +131,7 @@ export default class App {
             if (this.light) {
                 const smallSphere = smallSpherePivot.children[0];
                 smallSphere.getWorldPosition(this.light.target.position);
+                // target 을 변경하는 지, light 자체를 변경하는 지에 따라 다른 형상이니 유의
                 this.helper.update();
             }
         }
