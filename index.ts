@@ -5,7 +5,7 @@ import "./index.css";
 //     App;
 // };
 
-import App from "./src/components/msp";
+import App from "./src/components/07-lights-spotlight";
 
 window.onload = () => {
     new App();
