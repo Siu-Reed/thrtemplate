@@ -5,7 +5,7 @@ import "./index.css";
 //     App;
 // };
 
-import App from "./src/components/07-lights-spotlight";
+import App from "./src/components/10-practice";
 
 window.onload = () => {
     new App();
