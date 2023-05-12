@@ -5,7 +5,7 @@ import "./index.css";
 //     App;
 // };
 
-import App from "./src/components/inter/01-videoTexture";
+import App from "./src/components/basic/10-practice";
 
 window.onload = () => {
     new App();

@@ -45,4 +45,4 @@ requestAnimationFrame(render);
 
 window.addEventListener("resize", resize);
 
-export * as default from "./appFunction";
+export * from "./01-structure_function";

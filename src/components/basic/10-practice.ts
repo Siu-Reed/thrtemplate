@@ -15,8 +15,6 @@ export default class App {
     stageWidth = this.container!.clientWidth;
     stageHeight = this.container!.clientHeight;
 
-    //
-    //
     sunLight?: Three.PointLight;
 
     private systemCenterAxis = new Three.Object3D();

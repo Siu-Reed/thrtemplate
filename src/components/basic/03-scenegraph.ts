@@ -1,4 +1,5 @@
 import * as Three from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 export default class App {
     private container: HTMLDivElement = document.querySelector("#webgl-container")!;
@@ -23,6 +24,7 @@ export default class App {
         this.setupCamera();
         this.setupLight();
         this.setupModel();
+        this.setupControls();
 
         this.resize();
         requestAnimationFrame(this.render.bind(this));
@@ -33,7 +35,9 @@ export default class App {
         this.stageWidth = this.container.clientWidth;
         this.stageHeight = this.container.clientHeight;
     }
-
+    private setupControls() {
+        new OrbitControls(this.camera, this.container);
+    }
     private setupCamera() {
         this.camera = new Three.PerspectiveCamera(75, this.stageWidth / this.stageHeight, 0.1, 100);
         this.camera.position.z = 20;
